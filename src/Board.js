@@ -69,33 +69,46 @@ class Board extends Component {
     let keyR = -1;
     return (
       <div>
-        <table className="Board">
-          <tbody>
-            {this.state.board.map(r => {
-              keyR++;
-              let keyC = -1;
-              return (
-                <tr key={keyR}>
-                  {r.map(c => {
-                    keyC++;
-                    return (
-                      <Cell
-                        flipCellsAroundMe={this.flipCellsAround}
-                        isLit={c}
-                        cellCoords={`${keyR}-${keyC}`}
-                        key={`${keyR}-${keyC}`}
-                      />
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        {this.state.hasWon ? (
+          <div>
+            <p>
+              <span className="neon">You </span>
+              <span className="flux">win</span>
+            </p>
+            <p>You managed to turn every light off!!!😄</p>
+          </div>
+        ) : (
+          <div>
+            <p>
+              <span className="neon">LIGHTS </span>
+              <span className="flux">OUT</span>
+            </p>
 
-        <p>
-          {this.state.hasWon ? `Congratulations!!! You managed to turn off every light :D` : ``}
-        </p>
+            <table className="Board">
+              <tbody>
+                {this.state.board.map(r => {
+                  keyR++;
+                  let keyC = -1;
+                  return (
+                    <tr key={keyR}>
+                      {r.map(c => {
+                        keyC++;
+                        return (
+                          <Cell
+                            flipCellsAroundMe={this.flipCellsAround}
+                            isLit={c}
+                            cellCoords={`${keyR}-${keyC}`}
+                            key={`${keyR}-${keyC}`}
+                          />
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     );
   }
