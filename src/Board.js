@@ -4,8 +4,8 @@ import './Board.css';
 
 class Board extends Component {
   static defaultProps = {
-    nrows: 4,
-    ncols: 4
+    nrows: 3,
+    ncols: 3
   };
   constructor(props) {
     super(props);
