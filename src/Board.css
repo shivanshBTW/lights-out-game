@@ -2,6 +2,31 @@
   margin: 0 auto;
   box-shadow: 0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
 }
+.resetGame {
+  display: inline-block;
+  padding: 11px 27px;
+  margin: 15px;
+  border-radius: 0.15em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  font-size: 22px;
+  font-weight: bolder;
+  color: #ffffff;
+  background-color: #3369ff;
+  box-shadow: inset 0 -0.5em 0 -0.35em #0e46df;
+  text-align: center;
+  position: relative;
+}
+
+.resetGame:active {
+  top: 0.1em;
+}
+
+.resetGame:hover {
+   background-color: #0e46df;
+}
 
 @font-face {
   font-family: neon;
@@ -75,4 +100,11 @@
 p {
   font-size: 30px;
   font-weight: bold;
+}
+
+.winMessage {
+  font-weight: bold;
+  font-size: 25px;
+  margin: 7 auto;
+  margin-top: 15px;
 }

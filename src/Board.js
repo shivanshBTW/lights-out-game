@@ -16,6 +16,7 @@ class Board extends Component {
     };
     this.createBoard = this.createBoard.bind(this);
     this.flipCellsAround = this.flipCellsAround.bind(this);
+    this.resetGame = this.resetGame.bind(this);
   }
 
   createBoard() {
@@ -25,9 +26,10 @@ class Board extends Component {
     for (let i = 0; i < this.props.nrows; i++) {
       for (let j = 0; j < this.props.ncols; j++) {
         board[i][j] = Math.floor(Math.random() * 2) ? true : false;
+        // board[i][j] = false;
       }
     }
-    console.log(board);
+    // console.log(board);
     return board;
   }
 
@@ -63,6 +65,13 @@ class Board extends Component {
     this.setState({ board, hasWon });
   }
 
+  resetGame(e) {
+    this.setState({
+      hasWon: false,
+      board: this.createBoard()
+    });
+  }
+
   /** Render game board or winning message. */
 
   render() {
@@ -75,7 +84,6 @@ class Board extends Component {
               <span className="neon">You </span>
               <span className="flux">win</span>
             </p>
-            <p>You managed to turn every light off!!!😄</p>
           </div>
         ) : (
           <div>
@@ -83,32 +91,43 @@ class Board extends Component {
               <span className="neon">LIGHTS </span>
               <span className="flux">OUT</span>
             </p>
-
-            <table className="Board">
-              <tbody>
-                {this.state.board.map(r => {
-                  keyR++;
-                  let keyC = -1;
-                  return (
-                    <tr key={keyR}>
-                      {r.map(c => {
-                        keyC++;
-                        return (
-                          <Cell
-                            flipCellsAroundMe={this.flipCellsAround}
-                            isLit={c}
-                            cellCoords={`${keyR}-${keyC}`}
-                            key={`${keyR}-${keyC}`}
-                          />
-                        );
-                      })}
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
           </div>
         )}
+
+        <table className="Board">
+          <tbody>
+            {this.state.board.map(r => {
+              keyR++;
+              let keyC = -1;
+              return (
+                <tr key={keyR}>
+                  {r.map(c => {
+                    keyC++;
+                    return (
+                      <Cell
+                        flipCellsAroundMe={this.flipCellsAround}
+                        isLit={c}
+                        cellCoords={`${keyR}-${keyC}`}
+                        key={`${keyR}-${keyC}`}
+                        isWon={this.state.hasWon}
+                      />
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        {this.state.hasWon ? (
+          <div className="winMessage">
+            Congratulations!!!You managed to turn every light off!!!😄
+          </div>
+        ) : (
+          ''
+        )}
+        <button className="resetGame" onClick={this.resetGame}>
+          Reset
+        </button>
       </div>
     );
   }
